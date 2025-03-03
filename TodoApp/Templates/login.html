@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="{{ url_for('images', path='/fav.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', path='/css/bootstrap.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', path='/css/base.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tide - Login</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        .card {
+            border: none;
+            background: transparent;
+        }
+        .card-header {
+            background: transparent;
+            border: none;
+            text-align: center;
+            padding-bottom: 30px;
+        }
+        .card-header b {
+            color: #2d3748;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            color: #4a5568;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .form-control {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .btn-primary {
+            background: #667eea;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 30px;
+            font-weight: 500;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .card-footer {
+            background: transparent;
+            border: none;
+            text-align: center;
+            padding-top: 20px;
+        }
+        .card-footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .card-footer a:hover {
+            color: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <b>Welcome Back</b>
+            </div>
+            <div class="card-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" name="username" autocomplete="username" required placeholder="Enter your username">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password" autocomplete="current-password" required placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+            </div>
+            <div class="card-footer text-muted">
+                Don't have an account? <a href="/auth/register-page">Sign Up</a>
+            </div>
+        </div>
+    </div>
+    <script src="{{url_for('static', path='/js/jquery-slim.js')}}"></script>
+    <script src="{{url_for('static', path='/js/popper.js')}}"></script>
+    <script src="{{url_for('static', path='/js/bootstrap.js')}}"></script>
+    <script src="{{url_for('static', path='/js/base.js')}}" defer></script>
+</body>
+</html>

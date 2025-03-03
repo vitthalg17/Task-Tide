@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="{{ url_for('images', path='/fav.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', path='/css/bootstrap.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', path='/css/base.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Task</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+        .card-header {
+            background: transparent;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        .card-body {
+            padding: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            padding: 7px;
+            font-size: 1rem;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.25);
+        }
+        label {
+            font-weight: 500;
+            color: #4a5568;
+            margin-bottom: 8px;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background: #667eea;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: #5a6fe0;
+        }
+        .btn-secondary {
+            background: #718096;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background: #4a5568;
+        }
+        #successAlert {
+            display: none;
+            background-color: #C6F6D5;
+            color: #22543D;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #9AE6B4;
+        }
+        .gap-20 {
+            gap: 10px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-plus-circle me-2"></i> Create a New Task
+            </div>
+            <div class="card-body">
+                <div id="successAlert"></div>
+                <form id="todoForm">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required 
+                               placeholder="Enter task title">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required
+                                  placeholder="Enter task description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="priority">Priority Level</label>
+                        <select class="form-control" id="priority" name="priority" required>
+                            <option value="1">1 - Low Priority</option>
+                            <option value="2">2 - Medium-Low Priority</option>
+                            <option value="3">3 - Medium Priority</option>
+                            <option value="4">4 - Medium-High Priority</option>
+                            <option value="5">5 - High Priority</option>
+                        </select>
+                    </div>
+                    <div class="d-flex justify-content-end gap-20">
+                        <a href="/todos/todo-page" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i> Back to Tasks
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus me-2"></i> Add Task
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{url_for('static', path='/js/jquery-slim.js')}}"></script>
+    <script src="{{url_for('static', path='/js/popper.js')}}"></script>
+    <script src="{{url_for('static', path='/js/bootstrap.js')}}"></script>
+    <script src="{{url_for('static', path='/js/base.js')}}" defer></script>
+</body>
+</html>

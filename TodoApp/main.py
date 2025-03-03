@@ -9,18 +9,27 @@ import os
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
 
-# Get the current directory
-current_dir = os.path.dirname(os.path.abspath(__file__))
+# Print current directory and contents for debugging
+print("Current directory:", os.getcwd())
+print("Directory contents:", os.listdir())
 
-# Mount static directories with correct paths
-app.mount("/static", StaticFiles(directory=os.path.join(current_dir, "static")), name="static")
-app.mount("/images", StaticFiles(directory=os.path.join(current_dir, "static/images")), name="images")
+# Mount static directories
+app.mount("/static", StaticFiles(directory="TodoApp/static"), name="static")
+app.mount("/images", StaticFiles(directory="TodoApp/static/images"), name="images")
 
-# Set templates directory with correct path
-templates = Jinja2Templates(directory=os.path.join(current_dir, "templates"))
+# Set templates directory
+templates = Jinja2Templates(directory="TodoApp/templates")
 
 @app.get("/")
 def test(request: Request):
+    # Print template directory contents for debugging
+    template_dir = "TodoApp/templates"
+    print(f"Template directory: {template_dir}")
+    if os.path.exists(template_dir):
+        print("Template directory contents:", os.listdir(template_dir))
+    else:
+        print("Template directory not found!")
+    
     return templates.TemplateResponse("home.html", {"request": request})
 
 @app.get("/healthy")

@@ -1,6 +1,3 @@
-
-2. Create a new file called `render.yaml` in your root directory:
-```yaml
 services:
   - type: web
     name: fastapi-app
@@ -9,4 +6,3 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
-```

@@ -9,31 +9,19 @@ import os
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
 
-# Get the deployment directory
-DEPLOY_DIR = "/opt/render/project/src"
-APP_DIR = os.path.join(DEPLOY_DIR, "TodoApp")
-
-# Debug prints
-print("Current working directory:", os.getcwd())
-print("Contents of current directory:", os.listdir())
-print("Contents of TodoApp directory:", os.listdir(APP_DIR))
+# Get the current directory
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Mount static directories
-app.mount("/static", StaticFiles(directory=os.path.join(APP_DIR, "static")), name="static")
-app.mount("/images", StaticFiles(directory=os.path.join(APP_DIR, "static/images")), name="images")
+app.mount("/static", StaticFiles(directory=os.path.join(current_dir, "static")), name="static")
+app.mount("/images", StaticFiles(directory=os.path.join(current_dir, "static/images")), name="images")
 
 # Set templates directory
-templates = Jinja2Templates(directory=os.path.join(APP_DIR, "templates"))
+templates = Jinja2Templates(directory=os.path.join(current_dir, "templates"))
 
 @app.get("/")
 def test(request: Request):
-    template_dir = os.path.join(APP_DIR, "templates")
-    print(f"Looking for templates in: {template_dir}")
-    print(f"Templates directory exists: {os.path.exists(template_dir)}")
-    if os.path.exists(template_dir):
-        print("Templates directory contents:", os.listdir(template_dir))
-    return templates.TemplateResponse("home.html", {"request": request})
-
+    return templates.TemplateResponse("home.html",{"request":request})
 @app.get("/healthy")
 def healthcheck():
     return {"status": "healthy"}

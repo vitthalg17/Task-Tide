@@ -1,0 +1,12 @@
+
+2. Create a new file called `render.yaml` in your root directory:
+```yaml
+services:
+  - type: web
+    name: fastapi-app
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn TodoApp.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+```

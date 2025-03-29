@@ -3,10 +3,10 @@ services:
     name: fastapi-app
     buildCommand: |
       pip install -r requirements.txt
-      mkdir -p /opt/render/project/src/TodoApp/templates
-      cp -r TodoApp/templates/* /opt/render/project/src/TodoApp/templates/
-      ls -la /opt/render/project/src/TodoApp/templates/  # Debug: list contents
-    startCommand: uvicorn TodoApp.main:app --host 0.0.0.0 --port $PORT
+      mkdir -p /opt/render/project/src/templates
+      cp -r templates/* /opt/render/project/src/templates/
+      ls -la /opt/render/project/src/templates/  # Debug: list contents
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11

@@ -10,7 +10,7 @@ from fastapi.templating import Jinja2Templates
 from starlette.responses import RedirectResponse
 from jose import JWTError, jwt
 
-templates = Jinja2Templates(directory="TodoApp/templates")
+templates = Jinja2Templates(directory="templates")
 
 router = APIRouter(
     prefix="/todos",

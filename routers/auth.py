@@ -50,7 +50,7 @@ def get_db():
 db_dependency = Annotated[Session,Depends(get_db)]
 
 
-templates=Jinja2Templates(directory="TodoApp/templates")
+templates=Jinja2Templates(directory="templates")
 
 
 

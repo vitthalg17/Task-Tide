@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from TodoApp.database import Base, get_db
-from TodoApp.main import app
-from TodoApp.routers.todos import get_current_user
+from database import Base, get_db
+from main import app
+from routers.todos import get_current_user
 from fastapi.testclient import TestClient
 from fastapi import status
 

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="{{ url_for('images', path='/fav.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', path='/css/bootstrap.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', path='/css/base.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tide - Register</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            margin: 40px auto;
+        }
+        .card {
+            border: none;
+            background: transparent;
+        }
+        .card-header {
+            background: transparent;
+            border: none;
+            text-align: center;
+            padding-bottom: 30px;
+        }
+        .card-header b {
+            color: #2d3748;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            color: #4a5568;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .form-control {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 6px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .btn {
+            border-radius: 10px;
+            padding: 12px 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: #667eea;
+            border: none;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #667eea;
+            color: #667eea;
+            margin-left: 10px;
+        }
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .form-row {
+            margin-left: -10px;
+            margin-right: -10px;
+        }
+        .form-row > .col-md-6 {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <b>Create Account</b>
+            </div>
+            <div class="card-body">
+                <form id="registerForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>First Name</label>
+                            <input type="text" class="form-control" name="first_name" required placeholder="Enter your first name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" name="last_name" required placeholder="Enter your last name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Username</label>
+                            <input type="text" class="form-control" name="username" required placeholder="Choose a username">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email" required placeholder="Enter your email">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Role</label>
+                            <select class="form-control" name="role" required>
+                                <option value="">Select a role</option>
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Phone Number</label>
+                            <input type="tel" class="form-control" name="phone_number" required placeholder="Enter your phone number">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password" required placeholder="Create a password">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Confirm Password</label>
+                            <input type="password" class="form-control" name="password2" required placeholder="Confirm your password">
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary">Create Account</button>
+                        <a href="/auth/login-page" class="btn btn-secondary">Already have an account?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{{url_for('static', path='/js/jquery-slim.js')}}"></script>
+    <script src="{{url_for('static', path='/js/popper.js')}}"></script>
+    <script src="{{url_for('static', path='/js/bootstrap.js')}}"></script>
+    <script src="{{url_for('static', path='/js/base.js')}}" defer></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            const data = {
+                username: formData.get('username'),
+                email: formData.get('email'),
+                first_name: formData.get('first_name'),
+                last_name: formData.get('last_name'),
+                password: formData.get('password'),
+                role: formData.get('role'),
+                phone_number: formData.get('phone_number') || null
+            };
+
+            // Password confirmation check
+            if (data.password !== formData.get('password2')) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            try {
+                const response = await fetch('/auth/', {  // Changed URL to match your FastAPI route
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Registration failed');
+                }
+
+                const result = await response.json();
+                alert('Registration successful!');
+                window.location.href = '/auth/login-page';
+            } catch (error) {
+                console.error('Error:', error);
+                alert(error.message || 'Registration failed. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>
+</html>

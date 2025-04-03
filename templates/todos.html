@@ -257,6 +257,17 @@
             flex-shrink: 0;
         }
         
+        .copyright {
+            position: fixed;
+            bottom: 10px;
+            right: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.8rem;
+            z-index: 10;
+            font-weight: 300;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
         /* Mobile responsive styles */
         @media (max-width: 768px) {
             .container {
@@ -317,6 +328,12 @@
             .priority-badge {
                 font-size: 0.75rem;
                 padding: 3px 6px;
+            }
+            
+            .copyright {
+                font-size: 0.7rem;
+                bottom: 5px;
+                right: 10px;
             }
         }
     </style>
@@ -395,6 +412,8 @@
         </div>
     </div>
 
+    <div class="copyright">© <span id="currentYear"></span> Vitthal Goel</div>
+
     <script src="{{url_for('static', path='/js/jquery-slim.js')}}"></script>
     <script src="{{url_for('static', path='/js/popper.js')}}"></script>
     <script src="{{url_for('static', path='/js/bootstrap.js')}}"></script>
@@ -454,6 +473,9 @@
             }
         }
     });
+    
+    // Set current year for copyright
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>

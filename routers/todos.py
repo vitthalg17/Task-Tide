@@ -134,7 +134,6 @@ async def read_todo(user: user_dependency, db: db_dependency, todo_id: int = Pat
 @router.post('/todo', status_code=status.HTTP_201_CREATED)
 async def create_todo(request: Request, todo_request: TodoRequest, db: db_dependency):
     try:
-        # Try to get token from cookie first
         token = request.cookies.get("access_token")
         if not token:
             # If no cookie, check Authorization header
@@ -143,7 +142,7 @@ async def create_todo(request: Request, todo_request: TodoRequest, db: db_depend
                 token = auth_header.split(" ")[1]
             else:
                 raise HTTPException(status_code=401, detail="Authentication Failed")
-
+            
         try:
             payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
             user_id = payload.get("id")
@@ -154,8 +153,8 @@ async def create_todo(request: Request, todo_request: TodoRequest, db: db_depend
             db.add(todo_model)
             db.commit()
             
-            # Return a simple success response
-            return {"message": "Todo created successfully"}
+            # Return a simple status response instead of a message
+            return {"status": "success"}
 
         except JWTError:
             raise HTTPException(status_code=401, detail="Invalid token")

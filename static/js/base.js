@@ -62,21 +62,23 @@
                 console.log('Response status:', response.status);
 
                 if (response.ok) {
-                    console.log('Todo created successfully');
+                    console.log('Task created successfully');
                     const successAlert = document.getElementById('successAlert');
-                    successAlert.textContent = 'Todo created successfully!';
+                    successAlert.innerHTML = '<i class="fas fa-check-circle me-2"></i>Task successfully created!';
                     successAlert.style.display = 'block';
                     form.reset();
-                    alert('Todo created successfully!');
                     
-                    // Hide the message after 3 seconds
+                    // Display success message, then redirect after a delay
                     setTimeout(() => {
-                        successAlert.style.display = 'none';
-                    }, 3000);
+                        // Clear any existing alert before redirecting
+                        window.onbeforeunload = null;
+                        window.location.href = '/todos/todo-page?success=true'; // Redirect with success parameter
+                    }, 1500);
+                    
                     return;
                 } else {
                     const errorData = await response.json();
-                    throw new Error(errorData.detail || 'Failed to create todo');
+                    throw new Error(errorData.detail || 'Failed to create task');
                 }
             } catch (error) {
                 console.error('Error in form submission:', error);
@@ -262,9 +264,28 @@
         });
     }
 
-
-
-
+    // Show success message when redirected from task creation
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if coming from add-todo page with success parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const showSuccess = urlParams.get('success');
+        
+        if (showSuccess === 'true') {
+            const successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                successMessage.style.display = 'block';
+                
+                // Hide the message after 3 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    
+                    // Clean up the URL by removing the success parameter
+                    const newUrl = window.location.pathname;
+                    window.history.replaceState({}, document.title, newUrl);
+                }, 3000);
+            }
+        }
+    });
 
     // Helper function to get a cookie by name
     function getCookie(name) {

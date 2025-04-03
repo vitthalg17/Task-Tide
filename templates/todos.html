@@ -10,175 +10,331 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Tasks</title>
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+        
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
         }
+        
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
+            width: 92%;
+            height: auto;
+            min-height: 92vh;
+            max-height: 92vh;
+            display: flex;
+            flex-direction: column;
         }
+        
         .card {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             border: none;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            overflow: hidden;
+            width: 100%;
         }
+        
         .card-header {
             background: transparent;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            padding: 15px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+        
+        .card-body {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            flex: 1;
+        }
+        
+        .table-container {
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 100%;
+            flex: 1 1 auto;
+            padding-right: 5px;
+        }
+        
         .card-title {
             color: #2d3748;
             font-weight: 600;
             margin-bottom: 25px;
         }
+        
         .table {
-            margin-bottom: 30px;
+            width: 100%;
+            margin-bottom: 0;
         }
+        
         .table th {
             border-top: none;
             color: #4a5568;
             font-weight: 600;
             text-transform: uppercase;
             font-size: 0.85rem;
-            padding: 16px;
+            padding: 10px;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
         }
+        
         .table td {
             vertical-align: middle;
             color: #2d3748;
-            padding: 16px;
+            padding: 10px;
+            word-break: break-word;
         }
+        
         .btn {
             padding: 8px 16px;
             border-radius: 8px;
             font-weight: 500;
             transition: all 0.3s ease;
+            margin-bottom: 5px;
         }
+        
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
+        
         .btn-primary {
             background: #667eea;
             border: none;
+            color: white;
         }
+        
         .btn-primary:hover {
             background: #5a6fe0;
         }
+        
         .btn-info {
             background: #4299e1;
             border: none;
             color: white;
         }
+        
         .btn-info:hover {
             background: #3182ce;
             color: white;
         }
+        
         .btn-outline-danger {
             color: #e53e3e;
             border-color: #e53e3e;
         }
+        
         .btn-outline-danger:hover {
             background: #e53e3e;
             color: white;
         }
+        
         .btn-outline-primary {
             color: #667eea;
             border-color: #667eea;
-            margin-right: 10px;
+            margin-right: 5px;
+            margin-bottom: 5px;
         }
+        
         .btn-outline-primary:hover {
             background: #667eea;
             color: white;
         }
+        
         .strike-through-td {
             text-decoration: line-through;
             color: #718096;
         }
+        
         .priority-badge {
             padding: 4px 8px;
             border-radius: 12px;
             font-size: 0.85rem;
             font-weight: 500;
+            white-space: nowrap;
         }
+        
         .priority-1 { background: #C6F6D5; color: #22543D; }
         .priority-2 { background: #FEFCBF; color: #744210; }
         .priority-3 { background: #FED7D7; color: #742A2A; }
         .priority-4 { background: #FEB2B2; color: #742A2A; }
         .priority-5 { background: #F56565; color: white; }
+        
         .empty-state {
             padding: 40px;
             text-align: center;
             color: #718096;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
+        
         .empty-state i {
             font-size: 3rem;
             margin-bottom: 20px;
             color: #A0AEC0;
         }
+        
         .table-hover tbody tr:hover {
             background: rgba(102, 126, 234, 0.05);
             cursor: pointer;
         }
-        .add-todo-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 30px;
+        
+        .header-left {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
+            flex-direction: column;
         }
+        
+        .header-right {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
         .header-title {
             font-size: 1.5rem;
             font-weight: 600;
             color: #2d3748;
         }
+        
         .todo-count {
             font-size: 0.9rem;
             color: #718096;
             margin-top: 5px;
         }
+        
         .header-buttons {
             display: flex;
-            gap: 10px;
+            flex-wrap: wrap;
+            gap: 5px;
         }
+        
         .btn-danger {
             background-color: #dc3545;
             border: none;
             color: white;
         }
+        
         .btn-danger:hover {
             background-color: #bb2d3b;
             color: white;
         }
+        
         .gap-2 {
             gap: 0.5rem !important;
         }
+        
         .d-flex {
             display: flex !important;
+        }
+        
+        .alert-success {
+            margin-bottom: 15px;
+            flex-shrink: 0;
+        }
+        
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                width: 96%;
+                min-height: 85vh;
+                max-height: 90vh;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start !important;
+            }
+            
+            .header-right {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .d-flex.gap-2 {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn-sm {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .table td, .table th {
+                padding: 8px 5px;
+            }
+            
+            /* Make columns more suitable for mobile */
+            .table th:nth-child(3), .table td:nth-child(3) {
+                max-width: 120px;
+            }
+            
+            .table th:nth-child(2), .table td:nth-child(2) {
+                max-width: 100px;
+            }
+        }
+        
+        /* For very small screens */
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                border-radius: 15px;
+            }
+            
+            .table th {
+                font-size: 0.75rem;
+            }
+            
+            .priority-badge {
+                font-size: 0.75rem;
+                padding: 3px 6px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <div>
+            <div class="card-header">
+                <div class="header-left">
                     <div class="header-title">Your Tasks</div>
                     <div class="todo-count">{% if todos %}{{ todos|length }} task{% if todos|length != 1 %}s{% endif %}{% else %}No tasks{% endif %}</div>
                 </div>
-                <div class="header-buttons">
+                <div class="header-right">
                     <a href="/" class="btn btn-outline-primary">
                         <i class="fas fa-home me-2"></i>Home
+                    </a>
+                    <a href="add-todo-page" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Add Task
                     </a>
                     <button onclick="logout()" class="btn btn-outline-danger">
                         <i class="fas fa-sign-out-alt me-2"></i>Logout
@@ -186,42 +342,48 @@
                 </div>
             </div>
             <div class="card-body">
+                <div id="successMessage" class="alert alert-success" style="display: none; margin-bottom: 15px; border-radius: 10px;">
+                    <i class="fas fa-check-circle me-2"></i><span id="successMessageText">Task successfully created!</span>
+                </div>
+                
                 {% if todos %}
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col" width="5%">#</th>
-                            <th scope="col" width="30%">Title</th>
-                            <th scope="col" width="35%">Description</th>
-                            <th scope="col" width="15%">Priority</th>
-                            <th scope="col" width="15%">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for todo in todos %}
-                        <tr class="{% if todo.complete %}table-success{% endif %}">
-                            <td>{{loop.index}}</td>
-                            <td {% if todo.complete %}class="strike-through-td"{% endif %}>{{todo.title}}</td>
-                            <td {% if todo.complete %}class="strike-through-td"{% endif %}>{{todo.description}}</td>
-                            <td>
-                                <span class="priority-badge priority-{{todo.priority}}">
-                                    Priority {{todo.priority}}
-                                </span>
-                            </td>
-                            <td>
-                                <div class="d-flex gap-2">
-                                    <button onclick="window.location.href='edit-todo-page/{{todo.id}}'" type="button" class="btn btn-info btn-sm">
-                                        <i class="fas fa-edit me-1"></i>Edit
-                                    </button> <button onclick="deleteTodo('{{todo.id}}')" type="button" class="btn btn-danger btn-sm">
-                                   
-                                        <i class="fas fa-trash-alt me-1"></i>Delete
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <div class="table-container">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 5%;">#</th>
+                                <th scope="col" style="width: 20%;">Title</th>
+                                <th scope="col" style="width: 35%;">Description</th>
+                                <th scope="col" style="width: 15%;">Priority</th>
+                                <th scope="col" style="width: 25%;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for todo in todos %}
+                            <tr class="{% if todo.complete %}table-success{% endif %}">
+                                <td>{{loop.index}}</td>
+                                <td {% if todo.complete %}class="strike-through-td"{% endif %}>{{todo.title}}</td>
+                                <td {% if todo.complete %}class="strike-through-td"{% endif %}>{{todo.description}}</td>
+                                <td>
+                                    <span class="priority-badge priority-{{todo.priority}}">
+                                        Priority {{todo.priority}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <button onclick="window.location.href='edit-todo-page/{{todo.id}}'" type="button" class="btn btn-info btn-sm">
+                                            <i class="fas fa-edit me-1"></i>Edit
+                                        </button> 
+                                        <button onclick="deleteTodo('{{todo.id}}')" type="button" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash-alt me-1"></i>Delete
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
                 {% else %}
                 <div class="empty-state">
                     <i class="fas fa-tasks"></i>
@@ -232,10 +394,6 @@
             </div>
         </div>
     </div>
-    
-    <a href="add-todo-page" class="btn btn-primary add-todo-btn">
-        <i class="fas fa-plus"></i>
-    </a>
 
     <script src="{{url_for('static', path='/js/jquery-slim.js')}}"></script>
     <script src="{{url_for('static', path='/js/popper.js')}}"></script>
@@ -267,13 +425,35 @@
                 window.location.reload();
             } else {
                 const errorData = await response.json();
-                throw new Error(errorData.detail || 'Failed to delete todo');
+                throw new Error(errorData.detail || 'Failed to delete task');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert(error.message || 'An error occurred while deleting the todo');
+            alert(error.message || 'An error occurred while deleting the task');
         }
     }
+    
+    // Check for success parameter in URL and show message
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const showSuccess = urlParams.get('success');
+        
+        if (showSuccess === 'true') {
+            const successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                successMessage.style.display = 'block';
+                
+                // Hide the message after 3 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    
+                    // Clean up the URL by removing the success parameter
+                    const newUrl = window.location.pathname;
+                    window.history.replaceState({}, document.title, newUrl);
+                }, 3000);
+            }
+        }
+    });
     </script>
 </body>
 </html>

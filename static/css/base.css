@@ -6,6 +6,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -22,6 +23,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .container {
   max-width: 600px;
+  width: 100%;
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
@@ -43,6 +45,8 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
 .btn-primary {
@@ -52,61 +56,81 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .btn-primary:hover {
   background-color: #0c5a8a;
   border-color: #0c5a8a;
 }
-  
-  h1, h2, h3, h4, h5, h6 {
-    color: #323232;
-  }
-  
-  .main-color {
-    background-color: #0e76a8;
-  }
-  
-  .strike-through-td {
-    text-decoration: line-through;
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
   }
   
   .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 15px;
   }
   
   .btn-primary {
-    background-color: #0e76a8;
-    border-color: #0e76a8;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
+    width: 100%;
+    padding: 12px;
   }
   
-  .btn-primary:hover {
-    background-color: #0c5a8a;
-    border-color: #0c5a8a;
+  .form-control {
+    font-size: 15px;
   }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 5px;
+  }
+  
+  .container {
+    padding: 12px;
+    border-radius: 6px;
+  }
+  
+  h1 {
+    font-size: 1.6rem;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+  }
+  
+  .form-control {
+    padding: 8px;
+  }
+  
+  .btn-primary {
+    padding: 10px;
+    font-size: 15px;
+  }
+}
+
+/* Table responsiveness */
+@media (max-width: 600px) {
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  th, td {
+    white-space: nowrap;
+    padding: 8px !important;
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

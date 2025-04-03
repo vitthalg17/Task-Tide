@@ -22,6 +22,7 @@ templates = Jinja2Templates(directory=os.path.join(current_dir, "templates"))
 @app.get("/")
 def test(request: Request):
     return templates.TemplateResponse("home.html",{"request":request})
+
 @app.get("/healthy")
 def healthcheck():
     return {"status": "healthy"}
@@ -30,4 +31,13 @@ app.include_router(todos.router)
 app.include_router(auth.router)
 app.include_router(admin.router)
 app.include_router(users.router)
+
+@app.exception_handler(404)
+async def not_found_exception_handler(request: Request, exc):
+    return templates.TemplateResponse("404.html", {"request": request})
+
+# Disable FastAPI default exception handler to prevent alert popups
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc):
+    return {"status": "error", "detail": str(exc)}
 
